@@ -1,0 +1,53 @@
+import os
+import sys
+
+languages = {
+    "English": "en",
+    "Ukrainian": "uk",
+    "Russian": "ru",
+    "French": "fr",
+    "German": "de",
+    "Spanish": "es",
+    "Italian": "it",
+    "Chinese": "zh-cn",
+    "Japanese": "ja",
+    "Korean": "ko",
+}
+
+def mock_translate(input_text, src_lang, dest_lang):
+    return f"Translated '{input_text}' from {src_lang} to {dest_lang}."
+
+def translate_text():
+    input_text = input_box.toPlainText().strip()
+    if not input_text:
+        print("Warning: Please enter text to translate.")
+        return
+
+    src_lang = languages[source_language]
+    dest_lang = languages[target_language]
+
+    try:
+        result = mock_translate(input_text, src_lang, dest_lang)
+        print("Translation result:", result)
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+try:
+    print("Checking GUI environment... PyQt5 is not supported in this environment.")
+    sys.exit(1)
+except SystemExit:
+    print("Running in mock mode without GUI.")
+
+print("Welcome to the Command-Line Translator!")
+input_text = input("Enter text to translate: ")
+print("Available languages:")
+for idx, lang in enumerate(languages.keys(), 1):
+    print(f"{idx}. {lang}")
+
+source_index = int(input("Choose source language (number): ")) - 1
+source_language = list(languages.keys())[source_index]
+
+target_index = int(input("Choose target language (number): ")) - 1
+target_language = list(languages.keys())[target_index]
+
+translate_text()
